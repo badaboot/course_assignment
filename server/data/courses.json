@@ -220,5 +220,11 @@
     "course_name": "Advanced Visual Arts",
     "department": "Arts & Tech",
     "grade": "11/12"
+  },
+  {
+    "code": "ACH101",
+    "course_name": "Actuarial science",
+    "department": "Math",
+    "grade": "12"
   }
 ]

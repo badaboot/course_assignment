@@ -22,9 +22,19 @@ app.get('/api/students/:id', (req, res) => {
   res.json(student);
 });
 
+const coursesFilePath = path.join(__dirname, 'data', 'courses.json');
+
 app.get('/api/course-catalog', (req, res) => {
-  const courses = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'courses.json'), 'utf-8'));
+  const courses = JSON.parse(fs.readFileSync(coursesFilePath, 'utf-8'));
   res.json(courses);
+});
+
+app.post('/api/course-catalog', (req, res) => {
+  const courses = JSON.parse(fs.readFileSync(coursesFilePath, 'utf-8'));
+  const newCourse = { ...req.body };
+  courses.push(newCourse);
+  fs.writeFileSync(coursesFilePath, JSON.stringify(courses, null, 2));
+  res.status(201).json(newCourse);
 });
 
 app.get('/api/students/:student_id/course-requests', (req, res) => {
