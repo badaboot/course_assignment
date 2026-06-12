@@ -27,14 +27,32 @@ app.get('/api/course-catalog', (req, res) => {
   res.json(courses);
 });
 
-app.get('/api/elective-courses', (req, res) => {
-  const electiveCourses = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'electiveCourses.json'), 'utf-8'));
-  res.json(electiveCourses);
+app.get('/api/students/:student_id/course-requests', (req, res) => {
+  const recommendations = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'courseRecommendations.json'), 'utf-8'));
+  const { student_id } = req.params;
+  const { approval_status, request_type } = req.query;
+
+  let results = recommendations.filter(r => r.student_id === student_id);
+
+  if (approval_status) {
+    results = results.filter(r => r.approval_status === approval_status);
+  }
+  if (request_type) {
+    results = results.filter(r => r.request_type === request_type);
+  }
+
+  res.json(results);
 });
 
-app.get('/api/suggested-courses', (req, res) => {
-  const requiredCourses = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'requiredCourses.json'), 'utf-8'));
-  res.json(requiredCourses);
+app.patch('/api/course-requests/:id', (req, res) => {
+  const filePath = path.join(__dirname, 'data', 'courseRecommendations.json');
+  const recommendations = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const idx = recommendations.findIndex(r => r.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: 'Course request not found' });
+
+  recommendations[idx] = { ...recommendations[idx], ...req.body };
+  fs.writeFileSync(filePath, JSON.stringify(recommendations, null, 2));
+  res.json(recommendations[idx]);
 });
 
 app.use(express.static(path.join(__dirname, '../client/dist')));

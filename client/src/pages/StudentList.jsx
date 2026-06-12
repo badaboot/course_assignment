@@ -11,12 +11,6 @@ export default function StudentList() {
       .then(setStudents);
   }, []);
 
-  useEffect(() => {
-    fetch("/api/elective-courses")
-      .then((res) => res.json())
-      .then(setElectiveCourses);
-  }, []);
-
   return (
     <div>
       <h1>Students</h1>
@@ -27,7 +21,6 @@ export default function StudentList() {
             <th>Name</th>
             <th>Grade</th>
             <th>Profile</th>
-            <th>Elective Courses</th>
           </tr>
         </thead>
         <tbody>
@@ -39,11 +32,6 @@ export default function StudentList() {
               </td>
               <td>{s.grade}</td>
               <td>{s.profile}</td>
-              <td>
-                {electiveCourses
-                  ? (electiveCourses[String(s.grade)] || []).join(", ")
-                  : "..."}
-              </td>
             </tr>
           ))}
         </tbody>

@@ -5,7 +5,25 @@ export default function StudentDetail() {
   const { id } = useParams();
   const [student, setStudent] = useState(null);
   const [requiredCourses, setRequiredCourses] = useState(null);
-  const [electiveCourses, setElectiveCourses] = useState(null);
+
+  function updateRequestStatus(requestId, approvalStatus) {
+    const payload = {
+      approval_status: approvalStatus,
+      reviewed_by: "USR_COUNSELOR_04",
+      reviewed_at: new Date().toISOString(),
+    };
+    fetch(`/api/course-requests/${requestId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((updated) => {
+        setRequiredCourses((prev) =>
+          prev.map((r) => (r.id === updated.id ? updated : r)),
+        );
+      });
+  }
 
   useEffect(() => {
     fetch(`/api/students/${id}`)
@@ -16,17 +34,10 @@ export default function StudentDetail() {
   }, [id]);
 
   useEffect(() => {
-    fetch("/api/suggested-courses")
+    fetch(`/api/students/${id}/course-requests`)
       .then((res) => res.json())
       .then((data) => setRequiredCourses(data));
-  }, []);
-
-  useEffect(() => {
-    fetch("/api/elective-courses")
-      .then((res) => res.json())
-      .then((data) => setElectiveCourses(data));
-  }, []);
-
+  }, [id]);
   if (!student) return <p>Loading...</p>;
 
   return (
@@ -41,37 +52,58 @@ export default function StudentDetail() {
       <p>
         <strong>Profile:</strong> {student.profile}
       </p>
-      <p>
-        <strong>Suggested Requests:</strong>
-      </p>
-      <ul>
-        {student.suggested_requests &&
-          student.suggested_requests.map((r, i) => <li key={i}>{r}</li>)}
-      </ul>
-      <p>
-        <strong>Required Courses (Grade {student.grade}):</strong>
-      </p>
-      <ul>
-        {requiredCourses && requiredCourses[String(student.grade)] ? (
-          requiredCourses[String(student.grade)].map((c, i) => (
-            <li key={i}>{c}</li>
-          ))
-        ) : (
-          <li>None</li>
-        )}
-      </ul>
-      <p>
-        <strong>Elective Courses (Grade {student.grade}):</strong>
-      </p>
-      <ul>
-        {electiveCourses && electiveCourses[String(student.grade)] ? (
-          electiveCourses[String(student.grade)].map((c, i) => (
-            <li key={i}>{c}</li>
-          ))
-        ) : (
-          <li>None</li>
-        )}
-      </ul>
+      <table
+        border={1}
+        cellPadding={6}
+        style={{ borderCollapse: "collapse", marginTop: 12 }}
+      >
+        <thead>
+          <tr>
+            <th>Course Code</th>
+            <th>Request Type</th>
+            <th>Approval Status</th>
+            <th>System Rationale</th>
+            <th>Source</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {requiredCourses?.map((r) => (
+            <tr key={r.id}>
+              <td>{r.course_code}</td>
+              <td>{r.request_type}</td>
+              <td>{r.approval_status}</td>
+              <td>{r.system_rationale}</td>
+              <td>{r.source}</td>
+              <td>
+                {r.approval_status === "pending_review" && (
+                  <>
+                    <button
+                      onClick={() => updateRequestStatus(r.id, "approved")}
+                    >
+                      Approve
+                    </button>
+                    <button onClick={() => updateRequestStatus(r.id, "denied")}>
+                      Deny
+                    </button>
+                  </>
+                )}
+                {r.approval_status === "approved" && (
+                  <button onClick={() => updateRequestStatus(r.id, "denied")}>
+                    Deny
+                  </button>
+                )}
+                {r.approval_status === "denied" && (
+                  <button onClick={() => updateRequestStatus(r.id, "approved")}>
+                    Approve
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
       <Link to="/students">Back to students</Link>
     </div>
   );

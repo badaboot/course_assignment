@@ -3,130 +3,60 @@
     "id": "S001",
     "name": "Alex Rivera",
     "grade": 9,
-    "profile": "Strong academic start. On track for standard 4-year pathway. No flags.",
-    "suggested_requests": [
-      "MTH101 (P)",
-      "ENG101 (P)",
-      "SS101 (P)",
-      "SCI101 (P)",
-      "AT101 (E)"
-    ]
+    "profile": "Strong academic start. On track for standard 4-year pathway. No flags."
   },
   {
     "id": "S002",
     "name": "Mei Chen",
     "grade": 9,
-    "profile": "English Language Learner, recently enrolled from China. Strong in math. Needs ELL English support course alongside core coursework.",
-    "suggested_requests": [
-      "MTH101 (P)",
-      "ENG101 (P)",
-      "ENG102 (P, ELL Support)",
-      "SS101 (P)",
-      "SCI101 (P)"
-    ]
+    "profile": "English Language Learner, recently enrolled from China. Strong in math. Needs ELL English support course alongside core coursework."
   },
   {
     "id": "S003",
     "name": "Jordan Williams",
     "grade": 10,
-    "profile": "Failed MTH101 (Algebra I) last year. Must retake before advancing in math. Otherwise on track. Counselor should flag math priority carefully.",
-    "suggested_requests": [
-      "MTH101 (P – retake)",
-      "ENG201 (P)",
-      "SS201 (P)",
-      "SCI201 (P)",
-      "AT201 (E)"
-    ]
+    "profile": "Failed MTH101 (Algebra I) last year. Must retake before advancing in math. Otherwise on track. Counselor should flag math priority carefully."
   },
   {
     "id": "S004",
     "name": "Priya Patel",
     "grade": 10,
-    "profile": "High achiever, targeting AP track. Has completed Algebra I and Geometry with honors. Wants to accelerate into Algebra II as a 10th grader.",
-    "suggested_requests": [
-      "MTH201 (P – accelerated)",
-      "ENG201 (P)",
-      "SS201 (P)",
-      "SCI201 (P)",
-      "AT301 (E – early AP)"
-    ]
+    "profile": "High achiever, targeting AP track. Has completed Algebra I and Geometry with honors. Wants to accelerate into Algebra II as a 10th grader."
   },
   {
     "id": "S005",
     "name": "Marcus Thompson",
     "grade": 11,
-    "profile": "Average performer. Interested in arts and media. Meets all core requirements so far. Elective choices should reflect media interests.",
-    "suggested_requests": [
-      "MTH202 (P)",
-      "ENG301 (P)",
-      "SS301 (P)",
-      "SCI301 (P)",
-      "AT302 (E)",
-      "AT303 (E)"
-    ]
+    "profile": "Average performer. Interested in arts and media. Meets all core requirements so far. Elective choices should reflect media interests."
   },
   {
     "id": "S006",
     "name": "Sofia Mendez",
     "grade": 11,
-    "profile": "Strong across all subjects. Planning to take multiple APs. Counselor should confirm prerequisites are met and not overload schedule.",
-    "suggested_requests": [
-      "MTH401 (P)",
-      "ENG401 (P)",
-      "SS401 (P)",
-      "SCI401 (P)",
-      "AT301 (E)"
-    ]
+    "profile": "Strong across all subjects. Planning to take multiple APs. Counselor should confirm prerequisites are met and not overload schedule."
   },
   {
     "id": "S007",
     "name": "Ethan Park",
     "grade": 11,
-    "profile": "Interested in science and medicine. Solid grades. Wants Anatomy & Physiology as a senior elective so should be tracked for SCI301 now.",
-    "suggested_requests": [
-      "MTH202 (P)",
-      "ENG301 (P)",
-      "SS301 (P)",
-      "SCI301 (P)",
-      "SS302 (E)"
-    ]
+    "profile": "Interested in science and medicine. Solid grades. Wants Anatomy & Physiology as a senior elective so should be tracked for SCI301 now."
   },
   {
     "id": "S008",
     "name": "Aisha Johnson",
     "grade": 12,
-    "profile": "On track for graduation. Focused on completing requirements. Interested in Psychology and Economics as final electives.",
-    "suggested_requests": [
-      "MTH302 (P)",
-      "ENG401 (P)",
-      "SS402 (P)",
-      "SCI403 (E)",
-      "SS303 (E)",
-      "SS402 (E)"
-    ]
+    "profile": "On track for graduation. Focused on completing requirements. Interested in Psychology and Economics as final electives."
   },
   {
     "id": "S009",
     "name": "Liam O'Brien",
     "grade": 12,
-    "profile": "Full AP load. College-bound, strong academic record. Counselor should review for schedule conflicts across AP courses.",
-    "suggested_requests": [
-      "MTH401 (P)",
-      "ENG402 (P)",
-      "SS402 (P)",
-      "SCI402 (P)",
-      "AT301 (E)"
-    ]
+    "profile": "Full AP load. College-bound, strong academic record. Counselor should review for schedule conflicts across AP courses."
   },
   {
     "id": "S010",
     "name": "Nina Torres",
     "grade": 12,
-    "profile": "Transferred mid-junior year from another district. Credit evaluation pending. Some core credits may be missing — counselor must verify prior coursework before assigning requests.",
-    "suggested_requests": [
-      "TBD pending transcript review — placeholder: ENG403 (P)",
-      "SCI403 (E)",
-      "SS302 (E)"
-    ]
+    "profile": "Transferred mid-junior year from another district. Credit evaluation pending. Some core credits may be missing — counselor must verify prior coursework before assigning requests."
   }
 ]
