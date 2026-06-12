@@ -184,22 +184,26 @@ export default function StudentDetail() {
                 {r.approval_status === "pending_review" && (
                   <>
                     <button
+                      className="btn-approve" style={{ marginRight: "12px" }}
                       onClick={() => updateRequestStatus(r.id, "approved")}
                     >
                       Approve
                     </button>
-                    <button onClick={() => updateRequestStatus(r.id, "denied")}>
+                    <button
+                      className="btn-red"
+                      onClick={() => updateRequestStatus(r.id, "denied")}
+                    >
                       Deny
                     </button>
                   </>
                 )}
                 {r.approval_status === "approved" && (
-                  <button onClick={() => updateRequestStatus(r.id, "denied")}>
+                  <button className="btn-red" onClick={() => updateRequestStatus(r.id, "denied")}>
                     Deny
                   </button>
                 )}
                 {r.approval_status === "denied" && (
-                  <button onClick={() => updateRequestStatus(r.id, "approved")}>
+                  <button className="btn-approve" onClick={() => updateRequestStatus(r.id, "approved")}>
                     Approve
                   </button>
                 )}

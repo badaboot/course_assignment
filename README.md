@@ -24,11 +24,11 @@ Use `localhost:5173` during development to get hot module reload.
 
 ### UI Endpoints
 
-| Route                     | Page             | Description                                                          |
-| ------------------------- | ---------------- | -------------------------------------------------------------------- |
-| `/students`               | StudentList      | Lists all students with links to their detail page                   |
-| `/students/:id`           | StudentDetail    | Shows student info, a table of course requests, and Approve/Deny actions; includes a search-and-add widget to attach new course recommendations |
-| `/course-catalog`         | CourseCatalog    | Lists all courses in a table; supports adding and removing courses   |
+| Route             | Page          | Description                                                                                                                                     |
+| ----------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/students`       | StudentList   | Lists all students with links to their detail page                                                                                              |
+| `/students/:id`   | StudentDetail | Shows student info, a table of course requests, and Approve/Deny actions; includes a search-and-add widget to attach new course recommendations |
+| `/course-catalog` | CourseCatalog | Lists all courses in a table; supports adding and removing courses                                                                              |
 
 ### Tradeoffs
 
@@ -52,4 +52,7 @@ Payload: ```json
 "system_rationale": "Failed course in prior term; trigger mandatory retake."
 }
 
+```
+
 Behavior: The database creates the row, generates a unique UUID/ID (REQ_001), defaults approval_status to "pending_review", and nullifies human tracking variables.
+```

@@ -34,7 +34,10 @@ export default function CourseCatalog() {
   return (
     <div>
       <h1>Course Catalog</h1>
-      <button onClick={() => setShowForm(!showForm)}>
+      <button
+        style={{ marginBottom: "20px" }}
+        onClick={() => setShowForm(!showForm)}
+      >
         {showForm ? "Cancel" : "Add course"}
       </button>
 
@@ -68,7 +71,9 @@ export default function CourseCatalog() {
               <select
                 required
                 value={form.department}
-                onChange={(e) => setForm({ ...form, department: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, department: e.target.value })
+                }
               >
                 <option value="">-- Select --</option>
                 {departments.map((d) => (

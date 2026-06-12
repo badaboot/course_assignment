@@ -59,9 +59,9 @@
     "is_required_for_grad": true,
     "source": "system",
     "system_rationale": "Fast-track trigger: Met honors prerequisites in Algebra I and Geometry.",
-    "approval_status": "pending_review",
-    "reviewed_by": null,
-    "reviewed_at": null,
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:31:35.751Z",
     "notes": "Automated test cluster batch ingest."
   },
   {
@@ -72,9 +72,9 @@
     "is_required_for_grad": false,
     "source": "system",
     "system_rationale": "Advanced stem placement based on math acceleration tier.",
-    "approval_status": "pending_review",
-    "reviewed_by": null,
-    "reviewed_at": null,
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:31:36.964Z",
     "notes": "Automated test cluster batch ingest."
   },
   {
