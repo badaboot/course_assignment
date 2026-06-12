@@ -1,6 +1,6 @@
 [
   {
-    "id": "REQ_001",
+    "id": "0",
     "student_id": "S003",
     "course_code": "MTH101",
     "request_type": "primary",
@@ -13,7 +13,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_002",
+    "id": "1",
     "student_id": "S003",
     "course_code": "ENG201",
     "request_type": "primary",
@@ -26,7 +26,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_003",
+    "id": "2",
     "student_id": "S005",
     "course_code": "SCI201",
     "request_type": "primary",
@@ -39,7 +39,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_004",
+    "id": "3",
     "student_id": "S008",
     "course_code": "MTH101",
     "request_type": "primary",
@@ -52,7 +52,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_005",
+    "id": "4",
     "student_id": "S004",
     "course_code": "MTH201",
     "request_type": "primary",
@@ -65,7 +65,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_006",
+    "id": "5",
     "student_id": "S004",
     "course_code": "AT301",
     "request_type": "elective",
@@ -78,7 +78,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_007",
+    "id": "6",
     "student_id": "S006",
     "course_code": "SCI401",
     "request_type": "primary",
@@ -91,7 +91,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_008",
+    "id": "7",
     "student_id": "S009",
     "course_code": "MTH401",
     "request_type": "primary",
@@ -104,7 +104,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_009",
+    "id": "8",
     "student_id": "S001",
     "course_code": "MTH101",
     "request_type": "primary",
@@ -117,7 +117,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_010",
+    "id": "9",
     "student_id": "S001",
     "course_code": "AT101",
     "request_type": "elective",
@@ -130,7 +130,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_011",
+    "id": "10",
     "student_id": "S002",
     "course_code": "ENG101",
     "request_type": "primary",
@@ -143,7 +143,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_012",
+    "id": "11",
     "student_id": "S003",
     "course_code": "AT201",
     "request_type": "elective",
@@ -156,7 +156,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_013",
+    "id": "12",
     "student_id": "S007",
     "course_code": "SCI301",
     "request_type": "primary",
@@ -169,7 +169,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_014",
+    "id": "13",
     "student_id": "S009",
     "course_code": "ENG402",
     "request_type": "primary",
@@ -182,7 +182,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_015",
+    "id": "14",
     "student_id": "S004",
     "course_code": "ENG201",
     "request_type": "primary",
@@ -195,7 +195,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_016",
+    "id": "15",
     "student_id": "S006",
     "course_code": "AT302",
     "request_type": "alternate",
@@ -208,7 +208,7 @@
     "notes": "Automated test cluster batch ingest."
   },
   {
-    "id": "REQ_017",
+    "id": "16",
     "student_id": "S005",
     "course_code": "AT303",
     "type": "elective",
@@ -221,7 +221,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_018",
+    "id": "17",
     "student_id": "S002",
     "course_code": "MTH201",
     "request_type": "primary",
@@ -234,7 +234,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_019",
+    "id": "18",
     "student_id": "S007",
     "course_code": "SS302",
     "request_type": "elective",
@@ -247,7 +247,7 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_020",
+    "id": "19",
     "student_id": "S010",
     "course_code": "ENG403",
     "request_type": "primary",
@@ -260,7 +260,97 @@
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
-    "id": "REQ_021",
+    "id": "20",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "elective",
+    "is_required_for_grad": true,
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:38:16.982Z",
+    "notes": "Direct UI injection via search-and-add interaction."
+  },
+  {
+    "id": "21",
+    "student_id": "S001",
+    "course_code": "MTH301",
+    "request_type": "elective",
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:38:11.731Z",
+    "notes": "Direct UI injection via search-and-add interaction."
+  },
+  {
+    "id": "22",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "primary",
+    "is_required_for_grad": true,
+    "source": "system",
+    "system_rationale": "Standard grade-level progression rule.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:39:38.066Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "23",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "primary",
+    "is_required_for_grad": true,
+    "source": "system",
+    "system_rationale": "Standard grade-level progression rule.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:39:41.233Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "24",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "primary",
+    "is_required_for_grad": true,
+    "source": "system",
+    "system_rationale": "Standard grade-level progression rule.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:39:42.999Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "25",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "primary",
+    "is_required_for_grad": true,
+    "source": "system",
+    "system_rationale": "Standard grade-level progression rule.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:39:43.700Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "26",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "primary",
+    "is_required_for_grad": true,
+    "source": "system",
+    "system_rationale": "Standard grade-level progression rule.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:39:44.285Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "27",
     "student_id": "S001",
     "course_code": "MTH101",
     "request_type": "elective",
@@ -269,11 +359,24 @@
     "system_rationale": "Manually searched and added via student details dashboard view.",
     "approval_status": "approved",
     "reviewed_by": "USR_COUNSELOR_04",
-    "reviewed_at": "2026-06-12T05:19:30.955Z",
+    "reviewed_at": "2026-06-12T05:41:48.534Z",
     "notes": "Direct UI injection via search-and-add interaction."
   },
   {
-    "id": "REQ_022",
+    "id": "28",
+    "student_id": "S001",
+    "course_code": "AT101",
+    "request_type": "elective",
+    "is_required_for_grad": false,
+    "source": "student_interest_survey",
+    "system_rationale": "Selected via student interactive onboarding panel.",
+    "approval_status": "approved",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:41:53.400Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "29",
     "student_id": "S001",
     "course_code": "MTH301",
     "request_type": "elective",
@@ -281,7 +384,58 @@
     "system_rationale": "Manually searched and added via student details dashboard view.",
     "approval_status": "approved",
     "reviewed_by": "USR_COUNSELOR_04",
-    "reviewed_at": "2026-06-12T05:21:45.888Z",
+    "reviewed_at": "2026-06-12T05:41:57.950Z",
+    "notes": "Direct UI injection via search-and-add interaction."
+  },
+  {
+    "id": "30",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "elective",
+    "is_required_for_grad": true,
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:46:17.170Z",
+    "notes": "Direct UI injection via search-and-add interaction."
+  },
+  {
+    "id": "31",
+    "student_id": "S001",
+    "course_code": "AT101",
+    "request_type": "elective",
+    "is_required_for_grad": false,
+    "source": "student_interest_survey",
+    "system_rationale": "Selected via student interactive onboarding panel.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:46:19.219Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "32",
+    "student_id": "S001",
+    "course_code": "MTH301",
+    "request_type": "elective",
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:46:20.138Z",
+    "notes": "Direct UI injection via search-and-add interaction."
+  },
+  {
+    "id": "33",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "elective",
+    "is_required_for_grad": true,
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "approved",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:51:36.191Z",
     "notes": "Direct UI injection via search-and-add interaction."
   }
 ]

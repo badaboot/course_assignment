@@ -11,6 +11,19 @@ export default function StudentDetail() {
   const [requestType, setRequestType] = useState("primary");
   const [showAddCourse, setShowAddCourse] = useState(false);
 
+  function statusLabel(status) {
+    if (status === "approved") return "✅ " + status;
+    if (status === "denied") return "❌ " + status;
+    return status;
+  }
+
+  function requestTypeColor(type) {
+    if (type === "primary") return "pink";
+    if (type === "elective") return "lightblue";
+    if (type === "alternate") return "#ffbf00";
+    return "transparent";
+  }
+
   useEffect(() => {
     fetch("/api/course-catalog")
       .then((res) => res.json())
@@ -66,9 +79,7 @@ export default function StudentDetail() {
     })
       .then((res) => res.json())
       .then((updated) => {
-        setRequiredCourses((prev) =>
-          prev.map((r) => (r.id === updated.id ? updated : r)),
-        );
+        setRequiredCourses((prev) => [...(prev || []), updated]);
       });
   }
 
@@ -85,6 +96,16 @@ export default function StudentDetail() {
       .then((res) => res.json())
       .then((data) => setRequiredCourses(data));
   }, [id]);
+  const latestCourses = requiredCourses
+    ? Object.values(
+        requiredCourses.reduce((acc, r) => {
+          if (!acc[r.course_code] || Number(r.id) > Number(acc[r.course_code].id))
+            acc[r.course_code] = r;
+          return acc;
+        }, {}),
+      )
+    : [];
+
   if (!student) return <p>Loading...</p>;
 
   return (
@@ -152,7 +173,7 @@ export default function StudentDetail() {
           )}
         </div>
       )}
-
+      <h2>Course Requests</h2>
       <table
         border={1}
         cellPadding={6}
@@ -169,22 +190,19 @@ export default function StudentDetail() {
           </tr>
         </thead>
         <tbody>
-          {requiredCourses?.map((r) => (
+          {latestCourses.map((r) => (
             <tr key={r.id}>
               <td>{r.course_code}</td>
-              <td>{r.request_type}</td>
-              <td>
-                {r.approval_status === "approved" && "✅ "}
-                {r.approval_status === "denied" && "❌ "}
-                {r.approval_status}
-              </td>
+              <td style={{ background: requestTypeColor(r.request_type) }}>{r.request_type}</td>
+              <td>{statusLabel(r.approval_status)}</td>
               <td>{r.system_rationale}</td>
               <td>{r.source}</td>
               <td>
                 {r.approval_status === "pending_review" && (
                   <>
                     <button
-                      className="btn-approve" style={{ marginRight: "12px" }}
+                      className="btn-approve"
+                      style={{ marginRight: "12px" }}
                       onClick={() => updateRequestStatus(r.id, "approved")}
                     >
                       Approve
@@ -198,18 +216,51 @@ export default function StudentDetail() {
                   </>
                 )}
                 {r.approval_status === "approved" && (
-                  <button className="btn-red" onClick={() => updateRequestStatus(r.id, "denied")}>
+                  <button
+                    className="btn-red"
+                    onClick={() => updateRequestStatus(r.id, "denied")}
+                  >
                     Deny
                   </button>
                 )}
                 {r.approval_status === "denied" && (
-                  <button className="btn-approve" onClick={() => updateRequestStatus(r.id, "approved")}>
+                  <button
+                    className="btn-approve"
+                    onClick={() => updateRequestStatus(r.id, "approved")}
+                  >
                     Approve
                   </button>
                 )}
               </td>
             </tr>
           ))}
+        </tbody>
+      </table>
+      <h2>Student's course history</h2>
+      <table border={1} cellPadding={6} style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Course Code</th>
+            <th>Request Type</th>
+            <th>Approval Status</th>
+            <th>Reviewed By</th>
+            <th>Reviewed At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[...(requiredCourses || [])]
+            .sort((a, b) => Number(b.id) - Number(a.id))
+            .map((r) => (
+              <tr key={r.id}>
+                <td>{r.id}</td>
+                <td>{r.course_code}</td>
+                <td style={{ background: requestTypeColor(r.request_type) }}>{r.request_type}</td>
+                <td>{statusLabel(r.approval_status)}</td>
+                <td>{r.reviewed_by || "—"}</td>
+                <td>{r.reviewed_at ? `${new Date(r.reviewed_at).toLocaleString()} ${new Date(r.reviewed_at).toLocaleTimeString(undefined, { timeZoneName: "short" }).split(" ").pop()}` : "—"}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

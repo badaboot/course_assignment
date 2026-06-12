@@ -66,23 +66,26 @@ app.get('/api/students/:student_id/course-requests', (req, res) => {
 app.patch('/api/course-requests/:id', (req, res) => {
   const filePath = path.join(__dirname, 'data', 'courseRecommendations.json');
   const recommendations = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  const idx = recommendations.findIndex(r => r.id === req.params.id);
-  if (idx === -1) return res.status(404).json({ error: 'Course request not found' });
+  const existing = recommendations.find(r => r.id === req.params.id);
+  if (!existing) return res.status(404).json({ error: 'Course request not found' });
 
-  recommendations[idx] = { ...recommendations[idx], ...req.body };
+  const lastId = recommendations.reduce((max, r) => Math.max(max, Number(r.id)), -1);
+  const newRecord = {
+    ...existing,
+    ...req.body,
+    id: String(lastId + 1),
+  };
+  recommendations.push(newRecord);
   fs.writeFileSync(filePath, JSON.stringify(recommendations, null, 2));
-  res.json(recommendations[idx]);
+  res.status(201).json(newRecord);
 });
 
 app.post('/api/course-requests', (req, res) => {
   const filePath = path.join(__dirname, 'data', 'courseRecommendations.json');
   const recommendations = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  const lastId = recommendations.reduce((max, r) => {
-    const num = parseInt(r.id.replace('REQ_', ''), 10);
-    return num > max ? num : max;
-  }, 0);
+  const lastId = recommendations.reduce((max, r) => Math.max(max, Number(r.id)), -1);
   const newRecord = {
-    id: `REQ_${String(lastId + 1).padStart(3, '0')}`,
+    id: String(lastId + 1),
     ...req.body,
   };
   recommendations.push(newRecord);
