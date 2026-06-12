@@ -1,23 +1,5 @@
 [
   {
-    "code": "MTH101",
-    "course_name": "Algebra I",
-    "department": "Math",
-    "grade": "9"
-  },
-  {
-    "code": "MTH102",
-    "course_name": "Geometry",
-    "department": "Math",
-    "grade": "9/10"
-  },
-  {
-    "code": "MTH201",
-    "course_name": "Algebra II",
-    "department": "Math",
-    "grade": "10"
-  },
-  {
     "code": "MTH202",
     "course_name": "Pre-Calculus",
     "department": "Math",

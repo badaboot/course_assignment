@@ -37,6 +37,15 @@ app.post('/api/course-catalog', (req, res) => {
   res.status(201).json(newCourse);
 });
 
+app.delete('/api/course-catalog/:code', (req, res) => {
+  const courses = JSON.parse(fs.readFileSync(coursesFilePath, 'utf-8'));
+  const idx = courses.findIndex((c) => c.code === req.params.code);
+  if (idx === -1) return res.status(404).json({ error: "Course not found" });
+  const removed = courses.splice(idx, 1)[0];
+  fs.writeFileSync(coursesFilePath, JSON.stringify(courses, null, 2));
+  res.json(removed);
+});
+
 app.get('/api/students/:student_id/course-requests', (req, res) => {
   const recommendations = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'courseRecommendations.json'), 'utf-8'));
   const { student_id } = req.params;

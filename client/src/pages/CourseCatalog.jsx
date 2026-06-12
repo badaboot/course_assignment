@@ -109,6 +109,7 @@ export default function CourseCatalog() {
             <th>Course Name</th>
             <th>Department</th>
             <th>Grade</th>
+            <th>Remove</th>
           </tr>
         </thead>
         <tbody>
@@ -118,6 +119,25 @@ export default function CourseCatalog() {
               <td>{c.course_name}</td>
               <td>{c.department}</td>
               <td>{c.grade}</td>
+              <td>
+                <button
+                  onClick={() => {
+                    if (confirm(`Remove course ${c.code}?`)) {
+                      fetch(`/api/course-catalog/${c.code}`, {
+                        method: "DELETE",
+                      })
+                        .then((res) => res.json())
+                        .then(() =>
+                          setCourses((prev) =>
+                            prev.filter((x) => x.code !== c.code),
+                          ),
+                        );
+                    }
+                  }}
+                >
+                  Remove
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
