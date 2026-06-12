@@ -20,7 +20,7 @@ This starts both the **API server** and the **Vite dev server** concurrently.
 
 The Vite dev server proxies `/api` requests to the Express server.
 
-Use `localhost:5173` during development to get hot module reload.
+Use `http://localhost:5173/students` during development to get hot module reload.
 
 ### UI Endpoints
 
@@ -30,12 +30,30 @@ Use `localhost:5173` during development to get hot module reload.
 | `/students/:id`   | StudentDetail | Shows student info, a table of course requests, and Approve/Deny actions; includes a search-and-add widget to attach new course recommendations |
 | `/course-catalog` | CourseCatalog | Lists all courses in a table; supports adding and removing courses                                                                              |
 
+### API Endpoints
+
+| Method | Path                                        | Description                                                                                                          |
+| ------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/api/students`                             | Returns all students                                                                                                 |
+| GET    | `/api/students/:id`                         | Returns a single student by ID; 404 if not found                                                                     |
+| GET    | `/api/course-catalog`                       | Returns all courses                                                                                                  |
+| POST   | `/api/course-catalog`                       | Adds a new course to the catalog                                                                                     |
+| DELETE | `/api/course-catalog/:code`                 | Removes a course by code                                                                                             |
+| GET    | `/api/students/:student_id/course-requests` | Returns course recommendations for a student; optional `?approval_status=` and `?request_type=` query params         |
+| POST   | `/api/course-requests`                      | Creates a new course request with an auto-generated ID                                                               |
+| PATCH  | `/api/course-requests/:id`                  | Creates a new course request as a copy of an existing one with updated fields (Approve/Deny action), similar to logs |
+
 ### Tradeoffs
 
 - API has no versioning since this is a prototype. It would be versioned in production
 - frontend and backend use the same langauge in prototype. Backend is kept intentionally lean to be migrated to python in production
 - data is stored in `.json` files in `data` folder. CRUD operations change the file directly for this prototype
-- UI is minimal without styling or animations. Those will be added on once data model is more determined, or more UI direction provided (which libraries to use, etc)
+- UI is minimal without styling or animations. Those will be added on once data model is more determined, or more UI direction provided (which libraries to use/design system)
+
+### Features considered
+
+- on student detail and course catalog page can show charts for denied/approved/pending, and department breakdown of courses
+- on student list page can show chart: student breakdown by grade
 
 ### Assumptions
 

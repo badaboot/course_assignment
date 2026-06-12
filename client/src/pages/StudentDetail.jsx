@@ -1,15 +1,36 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+const notesOptions = [
+  {
+    label: "Core Retake (Prior Failure)",
+    db_notes_text: "Failed course in prior term; trigger mandatory retake.",
+    auto_flags: { is_retake: true, request_type: "primary" },
+  },
+  {
+    label: "Grade Improvement Attempt",
+    db_notes_text:
+      "Retaking course to improve original passing grade baseline.",
+    auto_flags: { is_retake: true, request_type: "elective" },
+  },
+  {
+    label: "Standard Acceleration Pathway",
+    db_notes_text: "Advanced placement based on track optimization metrics.",
+    auto_flags: { is_retake: false, request_type: "primary" },
+  },
+];
+
 export default function StudentDetail() {
   const { id } = useParams();
   const [student, setStudent] = useState(null);
-  const [requiredCourses, setRequiredCourses] = useState(null);
+  const [courseRequests, setCourseRequests] = useState(null);
   const [courseCatalog, setCourseCatalog] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(notesOptions[2]);
   const [requestType, setRequestType] = useState("primary");
   const [showAddCourse, setShowAddCourse] = useState(false);
+  const [error, setError] = useState(null);
 
   function statusLabel(status) {
     if (status === "approved") return "✅ " + status;
@@ -24,18 +45,28 @@ export default function StudentDetail() {
     return "transparent";
   }
 
+  function courseName(code) {
+    const c = courseCatalog.find((c) => c.code === code);
+    return c ? c.course_name : code;
+  }
+
   useEffect(() => {
     fetch("/api/course-catalog")
       .then((res) => res.json())
       .then((data) => setCourseCatalog(data));
   }, []);
 
+  const existingCodes = new Set(
+    (courseRequests || []).map((r) => r.course_code),
+  );
   const filteredCourses = searchQuery
-    ? courseCatalog.filter((c) =>
-        c.code.toLowerCase().includes(searchQuery.toLowerCase()),
+    ? courseCatalog.filter(
+        (c) =>
+          !existingCodes.has(c.code) &&
+          c.code.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : [];
-
+  // TODO: move add course component to separate file for easier testing
   function addCourseRequest() {
     if (!selectedCourse) return;
     const payload = {
@@ -43,13 +74,14 @@ export default function StudentDetail() {
       course_code: selectedCourse.code,
       request_type: requestType,
       is_required_for_grad: selectedCourse.is_required,
+      is_retake: selectedNote.auto_flags.is_retake,
       source: "counselor",
       system_rationale:
         "Manually searched and added via student details dashboard view.",
       approval_status: "approved",
       reviewed_by: "USR_COUNSELOR_04",
       reviewed_at: new Date().toISOString(),
-      notes: "Direct UI injection via search-and-add interaction.",
+      notes: selectedNote.db_notes_text,
     };
     fetch("/api/course-requests", {
       method: "POST",
@@ -58,10 +90,11 @@ export default function StudentDetail() {
     })
       .then((res) => res.json())
       .then((created) => {
-        setRequiredCourses((prev) => [...(prev || []), created]);
+        setCourseRequests((prev) => [...(prev || []), created]);
         setSelectedCourse(null);
         setSearchQuery("");
         setRequestType("primary");
+        setSelectedNote(notesOptions[2]);
         setShowAddCourse(false);
       });
   }
@@ -79,26 +112,26 @@ export default function StudentDetail() {
     })
       .then((res) => res.json())
       .then((updated) => {
-        setRequiredCourses((prev) => [...(prev || []), updated]);
+        setCourseRequests((prev) => [...(prev || []), updated]);
       });
   }
 
   useEffect(() => {
-    fetch(`/api/students/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setStudent(data);
-      });
+    setError(null);
+    fetch(`/api/students/${id}`).then((res) => {
+      if (!res.ok) return res.json().then((data) => setError(data.error));
+      return res.json().then((data) => setStudent(data));
+    });
   }, [id]);
 
   useEffect(() => {
     fetch(`/api/students/${id}/course-requests`)
       .then((res) => res.json())
-      .then((data) => setRequiredCourses(data));
+      .then((data) => setCourseRequests(data));
   }, [id]);
-  const latestCourses = requiredCourses
+  const latestCourses = courseRequests
     ? Object.values(
-        requiredCourses.reduce((acc, r) => {
+        courseRequests.reduce((acc, r) => {
           if (
             !acc[r.course_code] ||
             Number(r.id) > Number(acc[r.course_code].id)
@@ -106,14 +139,15 @@ export default function StudentDetail() {
             acc[r.course_code] = r;
           return acc;
         }, {}),
-      )
+      ).sort((a, b) => Number(b.id) - Number(a.id))
     : [];
 
+  if (error) return <p>Error: {error}</p>;
   if (!student) return <p>Loading...</p>;
 
   return (
     <div>
-      <h1>{student.name}</h1>
+      <h1>Student: {student.name}</h1>
       <p>
         <strong>ID:</strong> {student.id}
       </p>
@@ -160,17 +194,40 @@ export default function StudentDetail() {
               ))}
             </select>
           )}
-          {selectedCourse && (
+          {showAddCourse && (
             <div style={{ marginTop: 8 }}>
-              <select
-                value={requestType}
-                onChange={(e) => setRequestType(e.target.value)}
+              <label>
+                Request type:{" "}
+                <select
+                  value={requestType}
+                  onChange={(e) => setRequestType(e.target.value)}
+                >
+                  <option value="primary">primary</option>
+                  <option value="elective">elective</option>
+                  <option value="alternate">alternate</option>
+                </select>
+              </label>
+              <label style={{ marginLeft: 8 }}>
+                Note:{" "}
+                <select
+                  value={notesOptions.indexOf(selectedNote)}
+                  onChange={(e) =>
+                    setSelectedNote(notesOptions[Number(e.target.value)])
+                  }
+                  style={{ marginLeft: 4 }}
+                >
+                  {notesOptions.map((opt, i) => (
+                    <option key={i} value={i}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <button
+                onClick={addCourseRequest}
+                style={{ marginLeft: 8 }}
+                disabled={!selectedCourse}
               >
-                <option value="primary">primary</option>
-                <option value="elective">elective</option>
-                <option value="alternate">alternate</option>
-              </select>
-              <button onClick={addCourseRequest} style={{ marginLeft: 8 }}>
                 Save
               </button>
             </div>
@@ -178,6 +235,17 @@ export default function StudentDetail() {
         </div>
       )}
       <h2>Course Requests</h2>
+      <h3>
+        Approved:{" "}
+        {latestCourses.filter((c) => c.approval_status === "approved").length},
+        Denied:{" "}
+        {latestCourses.filter((c) => c.approval_status === "denied").length},
+        Pending:{" "}
+        {
+          latestCourses.filter((c) => c.approval_status === "pending_review")
+            .length
+        }
+      </h3>
       <table
         border={1}
         cellPadding={6}
@@ -186,6 +254,7 @@ export default function StudentDetail() {
         <thead>
           <tr>
             <th>Course Code</th>
+            <th>Course Name</th>
             <th>Request Type</th>
             <th>Approval Status</th>
             <th>System Rationale</th>
@@ -197,6 +266,7 @@ export default function StudentDetail() {
           {latestCourses.map((r) => (
             <tr key={r.id}>
               <td>{r.course_code}</td>
+              <td>{courseName(r.course_code)}</td>
               <td style={{ background: requestTypeColor(r.request_type) }}>
                 {r.request_type}
               </td>
@@ -242,25 +312,28 @@ export default function StudentDetail() {
           ))}
         </tbody>
       </table>
-      <h2>Student's course events, ordered by most recent</h2>
+      <h2>Historical changes</h2>
       <table border={1} cellPadding={6} style={{ borderCollapse: "collapse" }}>
         <thead>
           <tr>
             <th>ID</th>
             <th>Course Code</th>
+            <th>Course Name</th>
             <th>Request Type</th>
             <th>Approval Status</th>
             <th>Reviewed By</th>
             <th>Reviewed At</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>
-          {[...(requiredCourses || [])]
+          {[...(courseRequests || [])]
             .sort((a, b) => Number(b.id) - Number(a.id))
             .map((r) => (
               <tr key={r.id}>
                 <td>{r.id}</td>
                 <td>{r.course_code}</td>
+                <td>{courseName(r.course_code)}</td>
                 <td style={{ background: requestTypeColor(r.request_type) }}>
                   {r.request_type}
                 </td>
@@ -271,6 +344,7 @@ export default function StudentDetail() {
                     ? `${new Date(r.reviewed_at).toLocaleString()} ${new Date(r.reviewed_at).toLocaleTimeString(undefined, { timeZoneName: "short" }).split(" ").pop()}`
                     : "—"}
                 </td>
+                <td>{r.notes || "—"}</td>
               </tr>
             ))}
         </tbody>

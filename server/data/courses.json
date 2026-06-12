@@ -1,11 +1,5 @@
 [
   {
-    "code": "MTH202",
-    "course_name": "Pre-Calculus",
-    "department": "Math",
-    "grade": "11"
-  },
-  {
     "code": "MTH301",
     "course_name": "Calculus",
     "department": "Math",
@@ -200,6 +194,12 @@
   {
     "code": "AT303",
     "course_name": "Advanced Visual Arts",
+    "department": "Arts & Tech",
+    "grade": "11/12"
+  },
+  {
+    "code": "ATH404",
+    "course_name": "Art History",
     "department": "Arts & Tech",
     "grade": "11/12"
   }
