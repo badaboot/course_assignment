@@ -55,6 +55,22 @@ app.patch('/api/course-requests/:id', (req, res) => {
   res.json(recommendations[idx]);
 });
 
+app.post('/api/course-requests', (req, res) => {
+  const filePath = path.join(__dirname, 'data', 'courseRecommendations.json');
+  const recommendations = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const lastId = recommendations.reduce((max, r) => {
+    const num = parseInt(r.id.replace('REQ_', ''), 10);
+    return num > max ? num : max;
+  }, 0);
+  const newRecord = {
+    id: `REQ_${String(lastId + 1).padStart(3, '0')}`,
+    ...req.body,
+  };
+  recommendations.push(newRecord);
+  fs.writeFileSync(filePath, JSON.stringify(recommendations, null, 2));
+  res.status(201).json(newRecord);
+});
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('*', (req, res) => {

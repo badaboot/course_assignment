@@ -258,5 +258,18 @@
     "reviewed_by": "USR_COUNSELOR_03",
     "reviewed_at": "2026-06-11T15:55:10Z",
     "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "REQ_021",
+    "student_id": "S001",
+    "course_code": "MTH101",
+    "request_type": "elective",
+    "is_required_for_grad": true,
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "approved",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T04:27:48.757Z",
+    "notes": "Direct UI injection via search-and-add interaction."
   }
 ]

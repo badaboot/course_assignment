@@ -5,6 +5,51 @@ export default function StudentDetail() {
   const { id } = useParams();
   const [student, setStudent] = useState(null);
   const [requiredCourses, setRequiredCourses] = useState(null);
+  const [courseCatalog, setCourseCatalog] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [requestType, setRequestType] = useState("primary");
+
+  useEffect(() => {
+    fetch("/api/course-catalog")
+      .then((res) => res.json())
+      .then((data) => setCourseCatalog(data));
+  }, []);
+
+  const filteredCourses = searchQuery
+    ? courseCatalog.filter((c) =>
+        c.code.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    : [];
+
+  function addCourseRequest() {
+    if (!selectedCourse) return;
+    const payload = {
+      student_id: student.id,
+      course_code: selectedCourse.code,
+      request_type: requestType,
+      is_required_for_grad: selectedCourse.is_required,
+      source: "counselor",
+      system_rationale:
+        "Manually searched and added via student details dashboard view.",
+      approval_status: "approved",
+      reviewed_by: "USR_COUNSELOR_04",
+      reviewed_at: new Date().toISOString(),
+      notes: "Direct UI injection via search-and-add interaction.",
+    };
+    fetch("/api/course-requests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((created) => {
+        setRequiredCourses((prev) => [...(prev || []), created]);
+        setSelectedCourse(null);
+        setSearchQuery("");
+        setRequestType("primary");
+      });
+  }
 
   function updateRequestStatus(requestId, approvalStatus) {
     const payload = {
@@ -52,6 +97,50 @@ export default function StudentDetail() {
       <p>
         <strong>Profile:</strong> {student.profile}
       </p>
+
+      <div style={{ margin: "12px 0" }}>
+        <input
+          type="text"
+          placeholder="Search course code..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        {searchQuery && filteredCourses.length > 0 && (
+          <select
+            size={Math.min(filteredCourses.length, 5)}
+            style={{ display: "block", marginTop: 4 }}
+            onChange={(e) => {
+              const course = courseCatalog.find(
+                (c) => c.code === e.target.value,
+              );
+              setSelectedCourse(course);
+              setSearchQuery(course.code);
+            }}
+          >
+            {filteredCourses.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.code} - {c.course_name}
+              </option>
+            ))}
+          </select>
+        )}
+        {selectedCourse && (
+          <div style={{ marginTop: 8 }}>
+            <select
+              value={requestType}
+              onChange={(e) => setRequestType(e.target.value)}
+            >
+              <option value="primary">primary</option>
+              <option value="elective">elective</option>
+              <option value="alternate">alternate</option>
+            </select>
+            <button onClick={addCourseRequest} style={{ marginLeft: 8 }}>
+              Save
+            </button>
+          </div>
+        )}
+      </div>
+
       <table
         border={1}
         cellPadding={6}
