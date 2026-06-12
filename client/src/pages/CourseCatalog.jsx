@@ -14,7 +14,12 @@ export default function CourseCatalog() {
   }, []);
 
   const departments = [...new Set(courses.map((c) => c.department))].sort();
-  const grades = [...new Set(courses.map((c) => c.grade))].sort();
+  const grades = [...new Set(courses.map((c) => c.grade))].sort((a, b) => {
+    const na = parseInt(a, 10);
+    const nb = parseInt(b, 10);
+    if (na !== nb) return na - nb;
+    return a.localeCompare(b);
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,69 +47,72 @@ export default function CourseCatalog() {
       </button>
 
       {showForm && (
-        <form onSubmit={handleSubmit} style={{ margin: "12px 0" }}>
-          <div>
-            <label>
-              Code:{" "}
-              <input
-                required
-                value={form.code}
-                onChange={(e) => setForm({ ...form, code: e.target.value })}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Course Name:{" "}
-              <input
-                required
-                value={form.course_name}
-                onChange={(e) =>
-                  setForm({ ...form, course_name: e.target.value })
-                }
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Department:{" "}
-              <select
-                required
-                value={form.department}
-                onChange={(e) =>
-                  setForm({ ...form, department: e.target.value })
-                }
-              >
-                <option value="">-- Select --</option>
-                {departments.map((d) => (
-                  <option key={d} value={d}>
-                    {d}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div>
-            <label>
-              Grade:{" "}
-              <select
-                required
-                value={form.grade}
-                onChange={(e) => setForm({ ...form, grade: e.target.value })}
-              >
-                <option value="">-- Select --</option>
-                {grades.map((g) => (
-                  <option key={g} value={g}>
-                    {g}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <button type="submit" style={{ marginTop: 8 }}>
-            Save
-          </button>
-        </form>
+        <>
+          <h2>Add course</h2>
+          <form onSubmit={handleSubmit} style={{ margin: "12px 0" }}>
+            <div>
+              <label>
+                Code:{" "}
+                <input
+                  required
+                  value={form.code}
+                  onChange={(e) => setForm({ ...form, code: e.target.value })}
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Course Name:{" "}
+                <input
+                  required
+                  value={form.course_name}
+                  onChange={(e) =>
+                    setForm({ ...form, course_name: e.target.value })
+                  }
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Department:{" "}
+                <select
+                  required
+                  value={form.department}
+                  onChange={(e) =>
+                    setForm({ ...form, department: e.target.value })
+                  }
+                >
+                  <option value="">-- Select --</option>
+                  {departments.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                Grade:{" "}
+                <select
+                  required
+                  value={form.grade}
+                  onChange={(e) => setForm({ ...form, grade: e.target.value })}
+                >
+                  <option value="">-- Select --</option>
+                  {grades.map((g) => (
+                    <option key={g} value={g}>
+                      {g}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <button type="submit" style={{ marginTop: 8 }}>
+              Save
+            </button>
+          </form>
+        </>
       )}
 
       <table border="1" cellPadding="8" style={{ borderCollapse: "collapse" }}>

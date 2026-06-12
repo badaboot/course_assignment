@@ -437,5 +437,43 @@
     "reviewed_by": "USR_COUNSELOR_04",
     "reviewed_at": "2026-06-12T05:51:36.191Z",
     "notes": "Direct UI injection via search-and-add interaction."
+  },
+  {
+    "id": "34",
+    "student_id": "S010",
+    "course_code": "ENG403",
+    "request_type": "primary",
+    "is_required_for_grad": true,
+    "source": "counselor",
+    "system_rationale": "Manual transcript placeholder verification complete.",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:55:02.003Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "35",
+    "student_id": "S010",
+    "course_code": "ENG403",
+    "request_type": "primary",
+    "is_required_for_grad": true,
+    "source": "counselor",
+    "system_rationale": "Manual transcript placeholder verification complete.",
+    "approval_status": "approved",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:55:38.826Z",
+    "notes": "Ingested and updated via client dashboard interface."
+  },
+  {
+    "id": "36",
+    "student_id": "S010",
+    "course_code": "AT102",
+    "request_type": "primary",
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "approved",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:56:12.361Z",
+    "notes": "Direct UI injection via search-and-add interaction."
   }
 ]

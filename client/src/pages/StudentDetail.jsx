@@ -99,7 +99,10 @@ export default function StudentDetail() {
   const latestCourses = requiredCourses
     ? Object.values(
         requiredCourses.reduce((acc, r) => {
-          if (!acc[r.course_code] || Number(r.id) > Number(acc[r.course_code].id))
+          if (
+            !acc[r.course_code] ||
+            Number(r.id) > Number(acc[r.course_code].id)
+          )
             acc[r.course_code] = r;
           return acc;
         }, {}),
@@ -131,6 +134,7 @@ export default function StudentDetail() {
       )}
       {showAddCourse && (
         <div style={{ margin: "12px 0" }}>
+          <h2>Add course</h2>
           <input
             type="text"
             placeholder="Search course code..."
@@ -193,7 +197,9 @@ export default function StudentDetail() {
           {latestCourses.map((r) => (
             <tr key={r.id}>
               <td>{r.course_code}</td>
-              <td style={{ background: requestTypeColor(r.request_type) }}>{r.request_type}</td>
+              <td style={{ background: requestTypeColor(r.request_type) }}>
+                {r.request_type}
+              </td>
               <td>{statusLabel(r.approval_status)}</td>
               <td>{r.system_rationale}</td>
               <td>{r.source}</td>
@@ -236,7 +242,7 @@ export default function StudentDetail() {
           ))}
         </tbody>
       </table>
-      <h2>Student's course history</h2>
+      <h2>Student's course events, ordered by most recent</h2>
       <table border={1} cellPadding={6} style={{ borderCollapse: "collapse" }}>
         <thead>
           <tr>
@@ -255,10 +261,16 @@ export default function StudentDetail() {
               <tr key={r.id}>
                 <td>{r.id}</td>
                 <td>{r.course_code}</td>
-                <td style={{ background: requestTypeColor(r.request_type) }}>{r.request_type}</td>
+                <td style={{ background: requestTypeColor(r.request_type) }}>
+                  {r.request_type}
+                </td>
                 <td>{statusLabel(r.approval_status)}</td>
                 <td>{r.reviewed_by || "—"}</td>
-                <td>{r.reviewed_at ? `${new Date(r.reviewed_at).toLocaleString()} ${new Date(r.reviewed_at).toLocaleTimeString(undefined, { timeZoneName: "short" }).split(" ").pop()}` : "—"}</td>
+                <td>
+                  {r.reviewed_at
+                    ? `${new Date(r.reviewed_at).toLocaleString()} ${new Date(r.reviewed_at).toLocaleTimeString(undefined, { timeZoneName: "short" }).split(" ").pop()}`
+                    : "—"}
+                </td>
               </tr>
             ))}
         </tbody>
