@@ -19,7 +19,6 @@ export default function CourseCatalog() {
             <th>Course Name</th>
             <th>Department</th>
             <th>Grade</th>
-            <th>Required for graduation</th>
           </tr>
         </thead>
         <tbody>
@@ -29,7 +28,6 @@ export default function CourseCatalog() {
               <td>{c.course_name}</td>
               <td>{c.department}</td>
               <td>{c.grade}</td>
-              <td>{c.is_required ? "Yes" : "No"}</td>
             </tr>
           ))}
         </tbody>
