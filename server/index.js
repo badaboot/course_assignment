@@ -27,6 +27,16 @@ app.get('/api/course-catalog', (req, res) => {
   res.json(courses);
 });
 
+app.get('/api/elective-courses', (req, res) => {
+  const electiveCourses = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'electiveCourses.json'), 'utf-8'));
+  res.json(electiveCourses);
+});
+
+app.get('/api/suggested-courses', (req, res) => {
+  const requiredCourses = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'requiredCourses.json'), 'utf-8'));
+  res.json(requiredCourses);
+});
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('*', (req, res) => {

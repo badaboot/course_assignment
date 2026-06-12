@@ -4,15 +4,28 @@ import { useParams, Link } from "react-router-dom";
 export default function StudentDetail() {
   const { id } = useParams();
   const [student, setStudent] = useState(null);
+  const [requiredCourses, setRequiredCourses] = useState(null);
+  const [electiveCourses, setElectiveCourses] = useState(null);
 
   useEffect(() => {
     fetch(`/api/students/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched student data:", data);
         setStudent(data);
       });
   }, [id]);
+
+  useEffect(() => {
+    fetch("/api/suggested-courses")
+      .then((res) => res.json())
+      .then((data) => setRequiredCourses(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/elective-courses")
+      .then((res) => res.json())
+      .then((data) => setElectiveCourses(data));
+  }, []);
 
   if (!student) return <p>Loading...</p>;
 
@@ -34,6 +47,30 @@ export default function StudentDetail() {
       <ul>
         {student.suggested_requests &&
           student.suggested_requests.map((r, i) => <li key={i}>{r}</li>)}
+      </ul>
+      <p>
+        <strong>Required Courses (Grade {student.grade}):</strong>
+      </p>
+      <ul>
+        {requiredCourses && requiredCourses[String(student.grade)] ? (
+          requiredCourses[String(student.grade)].map((c, i) => (
+            <li key={i}>{c}</li>
+          ))
+        ) : (
+          <li>None</li>
+        )}
+      </ul>
+      <p>
+        <strong>Elective Courses (Grade {student.grade}):</strong>
+      </p>
+      <ul>
+        {electiveCourses && electiveCourses[String(student.grade)] ? (
+          electiveCourses[String(student.grade)].map((c, i) => (
+            <li key={i}>{c}</li>
+          ))
+        ) : (
+          <li>None</li>
+        )}
       </ul>
       <Link to="/students">Back to students</Link>
     </div>
