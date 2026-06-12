@@ -22,6 +22,14 @@ The Vite dev server proxies `/api` requests to the Express server.
 
 Use `localhost:5173` during development to get hot module reload.
 
+### UI Endpoints
+
+| Route                     | Page             | Description                                                          |
+| ------------------------- | ---------------- | -------------------------------------------------------------------- |
+| `/students`               | StudentList      | Lists all students with links to their detail page                   |
+| `/students/:id`           | StudentDetail    | Shows student info, a table of course requests, and Approve/Deny actions; includes a search-and-add widget to attach new course recommendations |
+| `/course-catalog`         | CourseCatalog    | Lists all courses in a table; supports adding and removing courses   |
+
 ### Tradeoffs
 
 - API has no versioning since this is a prototype. It would be versioned in production

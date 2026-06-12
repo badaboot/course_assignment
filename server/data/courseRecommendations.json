@@ -124,9 +124,9 @@
     "is_required_for_grad": false,
     "source": "student_interest_survey",
     "system_rationale": "Selected via student interactive onboarding panel.",
-    "approval_status": "approved",
-    "reviewed_by": "USR_COUNSELOR_01",
-    "reviewed_at": "2026-06-11T10:16:22Z",
+    "approval_status": "denied",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:19:32.388Z",
     "notes": "Ingested and updated via client dashboard interface."
   },
   {
@@ -269,7 +269,19 @@
     "system_rationale": "Manually searched and added via student details dashboard view.",
     "approval_status": "approved",
     "reviewed_by": "USR_COUNSELOR_04",
-    "reviewed_at": "2026-06-12T04:27:48.757Z",
+    "reviewed_at": "2026-06-12T05:19:30.955Z",
+    "notes": "Direct UI injection via search-and-add interaction."
+  },
+  {
+    "id": "REQ_022",
+    "student_id": "S001",
+    "course_code": "MTH301",
+    "request_type": "elective",
+    "source": "counselor",
+    "system_rationale": "Manually searched and added via student details dashboard view.",
+    "approval_status": "approved",
+    "reviewed_by": "USR_COUNSELOR_04",
+    "reviewed_at": "2026-06-12T05:21:45.888Z",
     "notes": "Direct UI injection via search-and-add interaction."
   }
 ]

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function StudentDetail() {
   const { id } = useParams();
@@ -9,6 +9,7 @@ export default function StudentDetail() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [requestType, setRequestType] = useState("primary");
+  const [showAddCourse, setShowAddCourse] = useState(false);
 
   useEffect(() => {
     fetch("/api/course-catalog")
@@ -48,6 +49,7 @@ export default function StudentDetail() {
         setSelectedCourse(null);
         setSearchQuery("");
         setRequestType("primary");
+        setShowAddCourse(false);
       });
   }
 
@@ -98,48 +100,58 @@ export default function StudentDetail() {
         <strong>Profile:</strong> {student.profile}
       </p>
 
-      <div style={{ margin: "12px 0" }}>
-        <input
-          type="text"
-          placeholder="Search course code..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        {searchQuery && filteredCourses.length > 0 && (
-          <select
-            size={Math.min(filteredCourses.length, 5)}
-            style={{ display: "block", marginTop: 4 }}
-            onChange={(e) => {
-              const course = courseCatalog.find(
-                (c) => c.code === e.target.value,
-              );
-              setSelectedCourse(course);
-              setSearchQuery(course.code);
-            }}
-          >
-            {filteredCourses.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.code} - {c.course_name}
-              </option>
-            ))}
-          </select>
-        )}
-        {selectedCourse && (
-          <div style={{ marginTop: 8 }}>
+      {!showAddCourse && (
+        <button
+          onClick={() => setShowAddCourse(true)}
+          style={{ margin: "12px 0" }}
+        >
+          Add course
+        </button>
+      )}
+      {showAddCourse && (
+        <div style={{ margin: "12px 0" }}>
+          <input
+            type="text"
+            placeholder="Search course code..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && filteredCourses.length > 0 && (
             <select
-              value={requestType}
-              onChange={(e) => setRequestType(e.target.value)}
+              size={Math.min(filteredCourses.length, 5)}
+              style={{ display: "block", marginTop: 4 }}
+              onChange={(e) => {
+                const course = courseCatalog.find(
+                  (c) => c.code === e.target.value,
+                );
+                setSelectedCourse(course);
+                setSearchQuery(course.code);
+              }}
             >
-              <option value="primary">primary</option>
-              <option value="elective">elective</option>
-              <option value="alternate">alternate</option>
+              {filteredCourses.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.code} - {c.course_name}
+                </option>
+              ))}
             </select>
-            <button onClick={addCourseRequest} style={{ marginLeft: 8 }}>
-              Save
-            </button>
-          </div>
-        )}
-      </div>
+          )}
+          {selectedCourse && (
+            <div style={{ marginTop: 8 }}>
+              <select
+                value={requestType}
+                onChange={(e) => setRequestType(e.target.value)}
+              >
+                <option value="primary">primary</option>
+                <option value="elective">elective</option>
+                <option value="alternate">alternate</option>
+              </select>
+              <button onClick={addCourseRequest} style={{ marginLeft: 8 }}>
+                Save
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       <table
         border={1}
@@ -161,7 +173,11 @@ export default function StudentDetail() {
             <tr key={r.id}>
               <td>{r.course_code}</td>
               <td>{r.request_type}</td>
-              <td>{r.approval_status}</td>
+              <td>
+                {r.approval_status === "approved" && "✅ "}
+                {r.approval_status === "denied" && "❌ "}
+                {r.approval_status}
+              </td>
               <td>{r.system_rationale}</td>
               <td>{r.source}</td>
               <td>
@@ -192,8 +208,6 @@ export default function StudentDetail() {
           ))}
         </tbody>
       </table>
-
-      <Link to="/students">Back to students</Link>
     </div>
   );
 }
