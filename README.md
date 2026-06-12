@@ -1,4 +1,12 @@
-# Course Assignment
+# Course assignment system
+
+Video demo: https://youtu.be/-LrsfXI3RAc
+
+Screenshots:
+<img width="1822" height="1095" alt="Screenshot 2026-06-12 at 8 23 34 AM" src="https://github.com/user-attachments/assets/604bf992-1175-47a0-9c52-8c39ee957e84" />
+<img width="1822" height="1095" alt="Screenshot 2026-06-12 at 8 23 37 AM" src="https://github.com/user-attachments/assets/3caff2b1-bc31-4a70-8e99-5175af7ed220" />
+<img width="1822" height="1095" alt="Screenshot 2026-06-12 at 8 24 38 AM" src="https://github.com/user-attachments/assets/8d67a553-60a6-4a40-9b3d-b4dfa50e5baf" />
+
 
 ## Getting started
 
