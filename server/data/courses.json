@@ -1,0 +1,261 @@
+[
+  {
+    "code": "MTH101",
+    "course_name": "Algebra I",
+    "department": "Math",
+    "grade": "9",
+    "is_required": true
+  },
+  {
+    "code": "MTH102",
+    "course_name": "Geometry",
+    "department": "Math",
+    "grade": "9/10",
+    "is_required": false
+  },
+  {
+    "code": "MTH201",
+    "course_name": "Algebra II",
+    "department": "Math",
+    "grade": "10",
+    "is_required": true
+  },
+  {
+    "code": "MTH202",
+    "course_name": "Pre-Calculus",
+    "department": "Math",
+    "grade": "11",
+    "is_required": true
+  },
+  {
+    "code": "MTH301",
+    "course_name": "Calculus",
+    "department": "Math",
+    "grade": "11/12",
+    "is_required": false
+  },
+  {
+    "code": "MTH302",
+    "course_name": "Statistics",
+    "department": "Math",
+    "grade": "11/12",
+    "is_required": true
+  },
+  {
+    "code": "MTH401",
+    "course_name": "AP Calculus AB",
+    "department": "Math",
+    "grade": "12",
+    "is_required": true
+  },
+  {
+    "code": "MTH402",
+    "course_name": "AP Statistics",
+    "department": "Math",
+    "grade": "12",
+    "is_required": false
+  },
+  {
+    "code": "ENG101",
+    "course_name": "English 9",
+    "department": "English",
+    "grade": "9",
+    "is_required": true
+  },
+  {
+    "code": "ENG102",
+    "course_name": "English 9 ELL Support",
+    "department": "English",
+    "grade": "9",
+    "is_required": true
+  },
+  {
+    "code": "ENG201",
+    "course_name": "English 10",
+    "department": "English",
+    "grade": "10",
+    "is_required": true
+  },
+  {
+    "code": "ENG301",
+    "course_name": "American Literature",
+    "department": "English",
+    "grade": "11",
+    "is_required": true
+  },
+  {
+    "code": "ENG302",
+    "course_name": "Creative Writing",
+    "department": "English",
+    "grade": "11/12",
+    "is_required": false
+  },
+  {
+    "code": "ENG401",
+    "course_name": "AP English Language",
+    "department": "English",
+    "grade": "12",
+    "is_required": true
+  },
+  {
+    "code": "ENG402",
+    "course_name": "AP English Literature",
+    "department": "English",
+    "grade": "12",
+    "is_required": true
+  },
+  {
+    "code": "ENG403",
+    "course_name": "Senior Seminar",
+    "department": "English",
+    "grade": "12",
+    "is_required": true
+  },
+  {
+    "code": "SS101",
+    "course_name": "World History",
+    "department": "Social Studies",
+    "grade": "9",
+    "is_required": true
+  },
+  {
+    "code": "SS201",
+    "course_name": "U.S. History",
+    "department": "Social Studies",
+    "grade": "10",
+    "is_required": true
+  },
+  {
+    "code": "SS301",
+    "course_name": "Civics & Government",
+    "department": "Social Studies",
+    "grade": "11",
+    "is_required": true
+  },
+  {
+    "code": "SS302",
+    "course_name": "Economics",
+    "department": "Social Studies",
+    "grade": "11/12",
+    "is_required": false
+  },
+  {
+    "code": "SS401",
+    "course_name": "AP U.S. History",
+    "department": "Social Studies",
+    "grade": "11/12",
+    "is_required": true
+  },
+  {
+    "code": "SS402",
+    "course_name": "AP Government",
+    "department": "Social Studies",
+    "grade": "12",
+    "is_required": true
+  },
+  {
+    "code": "SS403",
+    "course_name": "Psychology",
+    "department": "Social Studies",
+    "grade": "11/12",
+    "is_required": false
+  },
+  {
+    "code": "SCI101",
+    "course_name": "Biology",
+    "department": "Science",
+    "grade": "9",
+    "is_required": true
+  },
+  {
+    "code": "SCI201",
+    "course_name": "Chemistry",
+    "department": "Science",
+    "grade": "10",
+    "is_required": true
+  },
+  {
+    "code": "SCI301",
+    "course_name": "Physics",
+    "department": "Science",
+    "grade": "11",
+    "is_required": true
+  },
+  {
+    "code": "SCI302",
+    "course_name": "Environmental Science",
+    "department": "Science",
+    "grade": "11/12",
+    "is_required": false
+  },
+  {
+    "code": "SCI401",
+    "course_name": "AP Biology",
+    "department": "Science",
+    "grade": "11/12",
+    "is_required": true
+  },
+  {
+    "code": "SCI402",
+    "course_name": "AP Chemistry",
+    "department": "Science",
+    "grade": "12",
+    "is_required": true
+  },
+  {
+    "code": "SCI403",
+    "course_name": "Anatomy & Physiology",
+    "department": "Science",
+    "grade": "12",
+    "is_required": false
+  },
+  {
+    "code": "AT101",
+    "course_name": "Introduction to Computing",
+    "department": "Arts & Tech",
+    "grade": "9/10",
+    "is_required": false
+  },
+  {
+    "code": "AT102",
+    "course_name": "Visual Arts I",
+    "department": "Arts & Tech",
+    "grade": "9/10",
+    "is_required": false
+  },
+  {
+    "code": "AT201",
+    "course_name": "Web Design",
+    "department": "Arts & Tech",
+    "grade": "10/11",
+    "is_required": false
+  },
+  {
+    "code": "AT202",
+    "course_name": "Music Theory",
+    "department": "Arts & Tech",
+    "grade": "10/11",
+    "is_required": false
+  },
+  {
+    "code": "AT301",
+    "course_name": "AP Computer Science A",
+    "department": "Arts & Tech",
+    "grade": "11/12",
+    "is_required": false
+  },
+  {
+    "code": "AT302",
+    "course_name": "Digital Media & Film",
+    "department": "Arts & Tech",
+    "grade": "11/12",
+    "is_required": false
+  },
+  {
+    "code": "AT303",
+    "course_name": "Advanced Visual Arts",
+    "department": "Arts & Tech",
+    "grade": "11/12",
+    "is_required": false
+  }
+]
